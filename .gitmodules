@@ -19,9 +19,6 @@
 [submodule "src/openssl"]
         path = src/openssl
         url = https://salsa.debian.org/debian/openssl
-[submodule "src/krb5"]
-	path = src/krb5
-	url = https://salsa.debian.org/debian/krb5
 [submodule "src/golang-fips"]
 	path = src/golang-fips
 	url = https://github.com/golang-fips/go
