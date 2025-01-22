@@ -5,7 +5,7 @@ OPENSSL_VERSION_FULL = $(OPENSSL_VERSION_MAIN)-1~deb12u1
 OPENSSL_VERSION_FIPS = $(OPENSSL_VERSION_FULL)+fips
 OPENSSL = openssl_$(OPENSSL_VERSION_FIPS)_$(ARCH).deb
 $(OPENSSL)_SRC_PATH = $(SRC_PATH)/openssl
-OPENSSL_DST_PATH = krb5-$(KRB5_VERSION_MAIN)
+OPENSSL_DST_PATH = openssl-$(OPENSSL_VERSION_MAIN)
 
 # Download openssl code
 $(OPENSSL)_PRE_SCRIPT = rm -rf $(OPENSSL_DST_PATH);rm -rf $(SRC_PATH)/openssl;dget -u http://deb.debian.org/debian/pool/main/o/openssl/openssl_$(OPENSSL_VERSION_FULL).dsc;mv $(OPENSSL_DST_PATH) $(SRC_PATH)/openssl;
