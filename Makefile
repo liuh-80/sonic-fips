@@ -45,7 +45,7 @@ $(addprefix $(TARGET_PATH)/, $(MAIN_TARGETS)) : $(TARGET_PATH)/% : $$(addprefix 
 	# Copy debian folder
 	if [ -n "$($*_DEBIAN)" ]; then mkdir -p $($*_SRC_PATH)/debian; cp $($*_DEBIAN)/* -rf $($*_SRC_PATH)/debian/; fi
 	# Apply series of patches if exist
-	if [ -f $($*_SRC_PATH).patch/series ]; then pushd $($*_SRC_PATH) && rm -rf .pc && QUILT_PATCHES=../$(notdir $($*_SRC_PATH)).patch quilt push -a && mv .pc .pc1; popd; fi
+	if [ -f $($*_SRC_PATH).patch/series ]; then pushd $($*_SRC_PATH) && QUILT_PATCHES=../$(notdir $($*_SRC_PATH)).patch quilt push -a && mv .pc .pc1; popd; fi
 	if [ -n "$($*_PATCH_EXT)" ]; then pushd $($*_SRC_PATH); QUILT_PATCHES=$($*_PATCH_EXT) quilt push -a && mv .pc .pc2; popd; fi
 	# Merge the debian patches if not applied
 	if [ -f $($*_SRC_PATH).patch/debian.patch/series ]; then

@@ -8,8 +8,11 @@ $(KRB5)_SRC_PATH = $(SRC_PATH)/krb5
 KERB5_DST_PATH = krb5-$(KRB5_VERSION_MAIN)
 
 # Download krb5 code
-$(KRB5)_PRE_SCRIPT = rm -rf $(KERB5_DST_PATH);rm -rf $(SRC_PATH)/krb5;dget -u http://deb.debian.org/debian/pool/main/k/krb5/krb5_$(KRB5_VERSION_FULL).dsc;mv $(KERB5_DST_PATH) $(SRC_PATH)/krb5;
-
+$(KRB5)_PRE_SCRIPT = rm -rf $(KERB5_DST_PATH); \
+					 rm -rf $(SRC_PATH)/krb5; \
+					 dget -x http://deb.debian.org/debian/pool/main/k/krb5/krb5_$(KRB5_VERSION_FULL).dsc; \
+					 mv $(KERB5_DST_PATH) $(SRC_PATH)/krb5; \
+					 rm -rf $(SRC_PATH)/krb5/.pc;
 
 MAIN_TARGETS += $(KRB5)
 $(KRB5)_DERIVED_DEBS =
