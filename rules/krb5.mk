@@ -14,5 +14,8 @@ $(KRB5)_PRE_SCRIPT = rm -rf $(KERB5_DST_PATH); \
 					 mv $(KERB5_DST_PATH) $(SRC_PATH)/krb5; \
 					 rm -rf $(SRC_PATH)/krb5/.pc;
 
+# Download with dget will apply all debian patch
+$(KRB5)_DEBIAN_PATCH_APPLIED = true
+
 MAIN_TARGETS += $(KRB5)
 $(KRB5)_DERIVED_DEBS =

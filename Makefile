@@ -47,15 +47,26 @@ $(addprefix $(TARGET_PATH)/, $(MAIN_TARGETS)) : $(TARGET_PATH)/% : $$(addprefix 
 	# Apply series of patches if exist
 	if [ -f $($*_SRC_PATH).patch/series ]; then pushd $($*_SRC_PATH) && QUILT_PATCHES=../$(notdir $($*_SRC_PATH)).patch quilt push -a && mv .pc .pc1; popd; fi
 	if [ -n "$($*_PATCH_EXT)" ]; then pushd $($*_SRC_PATH); QUILT_PATCHES=$($*_PATCH_EXT) quilt push -a && mv .pc .pc2; popd; fi
-	# Merge the debian patches if not applied
+
+	# Merge the debian patches
 	if [ -f $($*_SRC_PATH).patch/debian.patch/series ]; then
 	  LAST_PATCH=$$(tail -n1  $($*_SRC_PATH).patch/debian.patch/series)
 	  if ! grep -q $$LAST_PATCH $($*_SRC_PATH)/debian/patches/series 2>/dev/null; then
 	    echo "Applying patches for $($*_SRC_PATH)/debian/patches/"
-	    cat $($*_SRC_PATH).patch/debian.patch/series >> $($*_SRC_PATH)/debian/patches/series
 	    cp $($*_SRC_PATH).patch/debian.patch/*.patch $($*_SRC_PATH)/debian/patches/
+		if [ "$($*_DEBIAN_PATCH_APPLIED)" == true ]; then 
+			# Debian offical patches already applied, copy and apply SONiC patches
+	    	cp $($*_SRC_PATH).patch/debian.patch/series $($*_SRC_PATH)/debian/patches/series
+			pushd $($*_SRC_PATH)
+			QUILT_PATCHES=debian/patches quilt push -a
+			popd
+		else
+			# Debian offical patches not applied, copy and append SONiC patches
+	    	cat $($*_SRC_PATH).patch/debian.patch/series >> $($*_SRC_PATH)/debian/patches/series
+		fi
 	  fi
 	fi
+
 	if [ -n "$($*_MAKEFILE)" ]; then
 	  $($*_BUILD_OPTIONS) make -C $($*_SRC_PATH) -f $($*_MAKEFILE) $(DEST)/$* | tee $(DEST)/$*.log
 	elif [ -f $($*_SRC_PATH)/debian/control ]; then

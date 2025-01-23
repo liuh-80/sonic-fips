@@ -14,6 +14,9 @@ $(OPENSSL)_PRE_SCRIPT = rm -rf $(OPENSSL_DST_PATH); \
 						mv $(OPENSSL_DST_PATH) $(SRC_PATH)/openssl; \
 						rm -rf $(SRC_PATH)/openssl/.pc;
 
+# Download with dget will apply all debian patch
+$(OPENSSL)_DEBIAN_PATCH_APPLIED = true
+
 MAIN_TARGETS += $(OPENSSL)
 $(OPENSSL)_DERIVED_DEBS = libssl3_$(OPENSSL_VERSION_FIPS)_$(ARCH).deb
 $(OPENSSL)_DERIVED_DEBS += libssl-dev_$(OPENSSL_VERSION_FIPS)_$(ARCH).deb
