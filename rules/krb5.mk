@@ -12,10 +12,10 @@ $(KRB5)_PRE_SCRIPT = rm -rf $(KERB5_DST_PATH); \
 					 rm -rf $(SRC_PATH)/krb5; \
 					 dget -x http://deb.debian.org/debian/pool/main/k/krb5/krb5_$(KRB5_VERSION_FULL).dsc; \
 					 mv $(KERB5_DST_PATH) $(SRC_PATH)/krb5; \
-					 rm -rf $(SRC_PATH)/krb5/.pc;
-
-# Download with dget will apply all debian patch
-$(KRB5)_DEBIAN_PATCH_APPLIED = true
+					 pushd $(SRC_PATH)/krb5; \
+					 quilt pop -a -f; \
+					 rm -rf .pc; \
+					 popd;
 
 MAIN_TARGETS += $(KRB5)
 $(KRB5)_DERIVED_DEBS =

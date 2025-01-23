@@ -10,12 +10,12 @@ OPENSSL_DST_PATH = openssl-$(OPENSSL_VERSION_MAIN)
 # Download openssl code
 $(OPENSSL)_PRE_SCRIPT = rm -rf $(OPENSSL_DST_PATH); \
 						rm -rf $(SRC_PATH)/openssl; \
-						dget -u http://deb.debian.org/debian/pool/main/o/openssl/openssl_$(OPENSSL_VERSION_FULL).dsc; \
+						dget -d -u http://deb.debian.org/debian/pool/main/o/openssl/openssl_$(OPENSSL_VERSION_FULL).dsc; \
 						mv $(OPENSSL_DST_PATH) $(SRC_PATH)/openssl; \
-						rm -rf $(SRC_PATH)/openssl/.pc;
-
-# Download with dget will apply all debian patch
-$(OPENSSL)_DEBIAN_PATCH_APPLIED = true
+						pushd $(SRC_PATH)/openssl; \
+						quilt pop -a -f; \
+						rm -rf .pc; \
+						popd;
 
 MAIN_TARGETS += $(OPENSSL)
 $(OPENSSL)_DERIVED_DEBS = libssl3_$(OPENSSL_VERSION_FIPS)_$(ARCH).deb
