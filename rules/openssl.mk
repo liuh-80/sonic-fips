@@ -10,7 +10,7 @@ OPENSSL_DST_PATH = openssl-$(OPENSSL_VERSION_MAIN)
 # Download openssl code
 $(OPENSSL)_PRE_SCRIPT = rm -rf $(OPENSSL_DST_PATH); \
 						rm -rf $(SRC_PATH)/openssl; \
-						dget -d -u http://deb.debian.org/debian/pool/main/o/openssl/openssl_$(OPENSSL_VERSION_FULL).dsc; \
+						dget -u http://deb.debian.org/debian/pool/main/o/openssl/openssl_$(OPENSSL_VERSION_FULL).dsc; \
 						mv $(OPENSSL_DST_PATH) $(SRC_PATH)/openssl; \
 						pushd $(SRC_PATH)/openssl; \
 						quilt pop -a -f; \

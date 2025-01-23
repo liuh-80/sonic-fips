@@ -10,7 +10,7 @@ KERB5_DST_PATH = krb5-$(KRB5_VERSION_MAIN)
 # Download krb5 code
 $(KRB5)_PRE_SCRIPT = rm -rf $(KERB5_DST_PATH); \
 					 rm -rf $(SRC_PATH)/krb5; \
-					 dget -x http://deb.debian.org/debian/pool/main/k/krb5/krb5_$(KRB5_VERSION_FULL).dsc; \
+					 dget -u http://deb.debian.org/debian/pool/main/k/krb5/krb5_$(KRB5_VERSION_FULL).dsc; \
 					 mv $(KERB5_DST_PATH) $(SRC_PATH)/krb5; \
 					 pushd $(SRC_PATH)/krb5; \
 					 quilt pop -a -f; \
