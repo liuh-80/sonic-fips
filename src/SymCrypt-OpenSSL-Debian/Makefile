@@ -82,4 +82,4 @@ $(TARGET): $(DEPENDS)
 	ln -sf ../$(shell basename $(LIBSYMCRYPTENGINE)) $(ENGINES_PATH)/symcryptengine.so
 	cp -rf debian/* $(DEBIAN_DIR)/
 	chmod a+r -R $(INSTALL_PATH)/
-	fakeroot dpkg-deb --build $(BUILD_ROOT_DIR) $(TARGET)
+	fakeroot dpkg-deb --debug --verbose --build $(BUILD_ROOT_DIR) $(TARGET)
