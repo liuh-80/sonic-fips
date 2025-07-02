@@ -7,7 +7,7 @@ parameters:
   - name: pool
     type: object
     default:
-      vmImage: ubuntu-20.04
+      vmImage: ubuntu-22.04
   - name: arch
     type: string
     default: amd64
