@@ -81,9 +81,12 @@ $(TARGET): $(DEPENDS)
 	ln -sf $(shell basename $(LIBSYMCRYPTENGINE)) $(INSTALL_PATH)/symcryptengine.so
 	ln -sf ../$(shell basename $(LIBSYMCRYPTENGINE)) $(ENGINES_PATH)/symcryptengine.so
 	cp -rf debian/* $(DEBIAN_DIR)/
-	chmod a+r -R $(INSTALL_PATH)/
+	sudo chmod a+r -R $(INSTALL_PATH)/
 
 	# debug
+	ulimit -Hn
+	ulimit -Sn
+	fakeroot -v
 	tree -u -g -h $(BUILD_ROOT_DIR) 
 	sleep 10
 	echo "step 1"
