@@ -86,5 +86,16 @@ $(TARGET): $(DEPENDS)
 	# debug
 	tree -u -g -h $(BUILD_ROOT_DIR) 
 	sleep 10
+	echo "step 1"
 
-	fakeroot dpkg-deb --debug --verbose --build $(BUILD_ROOT_DIR) $(TARGET)
+	fakeroot
+	sleep 10
+	echo "step 2"
+	
+	dpkg-deb --debug --verbose --build $(BUILD_ROOT_DIR) $(TARGET)
+	sleep 10
+	echo "step 3"
+
+	exit
+	sleep 10
+	echo "step 4"
