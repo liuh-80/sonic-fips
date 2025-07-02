@@ -13,7 +13,8 @@ parameters:
     default: amd64
   - name: image
     type: string
-    default: publicmirror.azurecr.io/debian:trixie
+    # default: publicmirror.azurecr.io/debian:trixie
+    default: debian:trixie
   - name: buildOthers
     type: boolean
     default: true
