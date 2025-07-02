@@ -14,9 +14,8 @@ parameters:
   - name: image
     type: string
     # default: publicmirror.azurecr.io/debian:trixie
-    # default: debian:trixie
     # default: sonicdev-microsoft.azurecr.io/sonic-slave-trixie-amd64
-    default: publicmirror.azurecr.io/debian:bookworm
+    default: sonicdev-microsoft.azurecr.io/sonic-slave-trixie
   - name: buildOthers
     type: boolean
     default: true
