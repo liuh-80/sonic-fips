@@ -81,7 +81,6 @@ $(TARGET): $(DEPENDS)
 	ln -sf $(shell basename $(LIBSYMCRYPTENGINE)) $(INSTALL_PATH)/symcryptengine.so
 	ln -sf ../$(shell basename $(LIBSYMCRYPTENGINE)) $(ENGINES_PATH)/symcryptengine.so
 	cp -rf debian/* $(DEBIAN_DIR)/
-	sudo chmod a+r -R $(INSTALL_PATH)/
 
 	# debug
 	ulimit -Hn
@@ -89,4 +88,5 @@ $(TARGET): $(DEPENDS)
 	fakeroot -v
 	tree -u -g -h $(BUILD_ROOT_DIR) 
 
+	sudo chmod a+r -R $(INSTALL_PATH)/
 	fakeroot dpkg-deb --debug --verbose --build $(BUILD_ROOT_DIR) $(TARGET)
