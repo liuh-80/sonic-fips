@@ -69,6 +69,15 @@ jobs:
       sudo apt-get install -y tree
 
       sudo apt install -f
+
+      # downgrade fakeroot
+      sudo apt remove fakeroot -y 
+      sudo apt remove libfakeroot -y 
+      sudo curl -o libfakeroot_1.31-1.2_amd64.deb http://ftp.us.debian.org/debian/pool/main/f/fakeroot/libfakeroot_1.31-1.2_amd64.deb
+      sudo dpkg -i libfakeroot_1.31-1.2_amd64.deb
+      sudo curl -o fakeroot_1.31-1.2_amd64.deb http://ftp.us.debian.org/debian/pool/main/f/fakeroot/fakeroot_1.31-1.2_amd64.deb
+      sudo dpkg -i fakeroot_1.31-1.2_amd64.deb
+
       mkdir -p $(Pipeline.Workspace)/target
     displayName: 'Install packages'
   - checkout: self
